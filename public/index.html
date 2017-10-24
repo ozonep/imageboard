@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web App</title>
+</head>
+<body>
+<h1>My Favorite NBA Players</h1>
+<main id="mymain"></main>
+<template id="imagePannel">
+    {{#each images}}
+    <img src="https://s3.amazonaws.com/spicedling/{{this.image}}" alt="">
+    {{/each}}
+</template>
+<template id="players">
+    <input type="file" name="file" >
+    <button type="button" id="upload-button">Upload!</button>
+
+    <h2>This is where our players will be!</h2>
+    {{#each players}}
+    <h2>{{name}}</h2>
+    <img src="{{imgUrl}}" alt="{{name}}">
+    {{/each}}
+</template>
+<script src="./js/handlebars.js"></script>
+<script src="./js/jquery.js"></script>
+<script src="./js/underscore.js"></script>
+<script src="./js/backbone.js"></script>
+<script src="./js/models.js"></script>
+<script src="./js/views.js"></script>
+<script src="./js/routers.js"></script>
+<script src="./js/script.js"></script>
+</body>
+</html>

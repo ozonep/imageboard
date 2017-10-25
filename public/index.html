@@ -15,15 +15,10 @@
     <img src="https://s3.amazonaws.com/spicedling/{{this.image}}" alt="">
     {{/each}}
 </template>
-<template id="players">
+<template id="images">
     <input type="file" name="file" >
     <button type="button" id="upload-button">Upload!</button>
-
     <h2>This is where our players will be!</h2>
-    {{#each players}}
-    <h2>{{name}}</h2>
-    <img src="{{imgUrl}}" alt="{{name}}">
-    {{/each}}
 </template>
 <script src="./js/handlebars.js"></script>
 <script src="./js/jquery.js"></script>

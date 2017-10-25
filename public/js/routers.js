@@ -3,7 +3,7 @@ var Router = Backbone.Router.extend({
         '': 'home'
     },
     home: function() {
-        var view = new getImageView({
+        var view = new sendImageView({
             model: new imagesModel
         });
     }

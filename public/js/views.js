@@ -7,7 +7,7 @@ var sendImageView = Backbone.View.extend({
         });
     },
     render: function() {
-        var ourRenderedTemplate = Handlebars.templates.players(this.model.toJSON());
+        var ourRenderedTemplate = Handlebars.templates.images(this.model.toJSON());
         this.$el.html(ourRenderedTemplate);
     },
     events: {
@@ -35,7 +35,7 @@ var getImageView = Backbone.View.extend({
         });
     },
     render: function() {
-        var ourRenderedTemplate = Handlebars.templates.imagePannel(this.model.toJSON());
+        var ourRenderedTemplate = Handlebars.templates.images(this.model.toJSON());
         this.$el.html(ourRenderedTemplate);
     },
 });

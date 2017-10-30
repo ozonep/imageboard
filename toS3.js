@@ -88,18 +88,43 @@ function sendToS3(fileObj) {
 //             'x-amz-acl': 'public-read'
 //         });
 //         const fs = require('fs');
-//         const readStream = fs.createReadStream(fileObj.path);
-//         readStream.pipe(s3Request);
+        const readStream = fs.createReadStream(file.path);
+        readStream.pipe(s3Request);
 //
-//         s3Request.on('response', s3Response => {
-//             const wasSuccessful = s3Response.statusCode == 200;
-//             if (wasSuccessful) {
-//                 resolve()
-//             } else {
-//                 reject()
-//             }
-//         });
-//     });
-// }
+        s3Request.on('response', s3Response => {
+            const wasSuccessful = s3Response.statusCode == 200;
+            if (wasSuccessful) {
+                resolve()
+            } else {
+                reject()
+            }
+        });
+    });
+}
 
 module.exports.toS3 = sendToS3;
+
+My OLD upload to S3 code:
+// fs.readFile(req.file.path, function (err, data) {
+//     if (err) { throw err;}
+//     AWS.config.loadFromPath(__dirname + '/secAWS.json');
+//     let base64data = new Buffer(data, 'binary');
+//     let s3 = new AWS.S3();
+//     let params = {Bucket: 'ozonepimageb', Key: req.file.filename, Body: base64data, ACL: 'public-read'};
+//     s3.upload(params, function (err, resp) {
+//         console.log(resp.Location);
+//         if (resp.Location) {
+//             res.json({
+//                 success: true
+//             });
+//             const text = 'INSERT INTO images (image, username, title, description) VALUES ($1, $2, $3, $4) RETURNING *';
+//             const values = [resp.Location, username, title, description];
+//             db.query(text, values);
+//         } else {
+//             res.json({
+//                 success: false
+//             });
+//         }
+//         console.log('Successfully uploaded package');
+//     });
+// });

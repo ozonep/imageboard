@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i');
+
+@font-face {
+    font-family: "Pacifico";
+    src: url("pacifico.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 50px;
+    font-family: "PT Sans", sans-serif;
+}
+
+header {
+    height: 80px;
+    background-color: black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.society {
+    font-family: "Pacifico", Arial, sans-serif;
+    font-weight: 700;
+    text-transform: capitalize;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+
+.grayscale {
+    filter: grayscale(100%);
+}
+
+.logopart a:hover img {
+    filter: grayscale(0%);
+}
+
+.logopart a:hover + .society {
+    animation: rainbow 1s infinite;
+}
+
+@keyframes rainbow{
+    20%{color: red;}
+    40%{color: yellow;}
+    60%{color: green;}
+    80%{color: blue;}
+    100%{color: orange;}
+}
+
+.omni {
+    width: 80px;
+    height: 80px;
+}
+
+.invert {
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    width: 150px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+header a {
+    color: white;
+}
+
+header a:hover {
+    color: lightcyan;
+}
+
+footer {
+    height: 50px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+small {
+    font-size: 1rem;
+}
+
+.social {
+    height: 30px;
+}
+
+.fb {
+    height: 29px;
+}
+
+.social-container {
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-container a:hover img {
+    filter: blur(1px) invert(100%);
+}
+
+
+/*STYLING DIV WITH UPLOAD*/
+
+.uploading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    width: 300px;
+    height: 30px;
+    margin-bottom: 0.7rem;
+}
+
+h1 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.input:invalid {
+    border: 1px dotted red;
+}
+
+.input:valid {
+    border: 1px solid green;
+}
+
+label {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+#upload-button {
+    margin-top: 10px;
+}
+
+
+/*STYLING DIV WITH IMAGES*/
+

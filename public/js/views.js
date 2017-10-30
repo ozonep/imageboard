@@ -1,27 +1,23 @@
 var sendImageView = Backbone.View.extend({
-    el: '#mymain',
+    el: '#myupload',
     initialize: function() {
         var view = this;
-        this.model.on('change', function() {
-            view.render();
-        });
+        view.render();
     },
     render: function() {
-        var ourRenderedTemplate = Handlebars.templates.images(this.model.toJSON());
-        this.$el.html(ourRenderedTemplate);
+        let ourTemplate = Handlebars.templates.images();
+        this.$el.html(ourTemplate);
     },
     events: {
-        'click #upload-button': function(){
-            var file = $('input[type="file"]').get(0).files[0];
-            var formData = new FormData();
-            formData.append('file', file);
-            $.ajax({
-                url: '/upload',
-                method: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false
+        'click #upload-button': function() {
+            this.model.set({
+                file: $('input[type="file"]').get(0).files[0],
+                username: $("#username").val(),
+                title: $("#title").val(),
+                description: $("#description").val(),
+                tags: $("#tags").val()
             });
+            this.model.save()
         }
     }
 });
@@ -39,3 +35,9 @@ var getImageView = Backbone.View.extend({
         this.$el.html(ourRenderedTemplate);
     },
 });
+
+
+// var imageCollectionView =
+// newImage: function(data) {
+//     return this.collection.create(data);
+// }

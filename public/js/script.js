@@ -5,6 +5,7 @@ Array.prototype.slice.call(templates).forEach(function(tmpl) {
 });
 Handlebars.partials = Handlebars.templates;
 
+var main = $('#main');
 
 
 var router = new Router;

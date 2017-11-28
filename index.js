@@ -9,7 +9,10 @@ const AWS = require('aws-sdk');
 const db = spicedPg('postgres://ivanmalkov:password@localhost:5432/img');
 const fs = require('fs');
 const stream = require('stream');
-// const toS3 = require('./toS3').toS3;
+const Vision = require('@google-cloud/vision');
+const vision = new Vision({
+    keyFilename: '/Users/ivanmalkov/Desktop/dev/nutmeg-imageboard/google.json'
+});
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -33,18 +36,35 @@ var uploader = multer({
     }
 });
 
-app.get('/home', (req,res) => {
-    db.query('SELECT id, image FROM images').then((results) => {
-        var jsonData = results.rows;
-        var data = { images: jsonData };
-        res.json(data);
-    });
-    res.json(data);
-});
+// app.get('/home', (req,res) => {
+//     db.query('SELECT id, image FROM images').then((results) => {
+//         var jsonData = results.rows;
+//         var data = { images: jsonData };
+//         res.json(data);
+//     });
+//     res.json(data);
+// });
 
 app.post('/upload', uploader.single('file'), function(req, res) {
     console.log("We uploaded the file");
     let filik = req.file;
+    const fileName = filik.path;
+    const request = {
+        source: {
+            filename: fileName
+        }
+    };
+    vision.labelDetection(request)
+        .then((results) => {
+            const labels = results[0].labelAnnotations;
+            console.log(labels);
+            labels.forEach((label) => {
+                console.log(label.description)
+            });
+        })
+        .catch((err) => {
+            console.error('ERROR:', err);
+        });
     let username = req.body.username;
     let title = req.body.title;
     let description = req.body.description;
@@ -63,7 +83,7 @@ app.post('/upload', uploader.single('file'), function(req, res) {
                     res.json({
                         success: true
                     });
-                    const text = 'INSERT INTO images (image, username, title, description) VALUES ($1, $2, $3, $4) RETURNING *';
+                    const text = 'INSERT INTO images (image, username, title, description) VALUES ($1, $2, $3, $4)';
                     const values = [resp.Location, username, title, description];
                     db.query(text, values);
                 } else {

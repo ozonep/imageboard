@@ -18,6 +18,7 @@ var UploadModel = Backbone.Model.extend({
         formData.append('title', this.get('title'));
         formData.append('description', this.get('description'));
         formData.append('tags', this.get('tags'));
+        var view = this;
         $.ajax({
             url: '/upload',
             method: 'POST',
@@ -25,7 +26,9 @@ var UploadModel = Backbone.Model.extend({
             processData: false,
             contentType: false,
             success: function() {
-                window.location = ''
+                // window.location = ''
+                router.navigate('', {trigger: true});
+                view.fetch();
             }
         });
     },
